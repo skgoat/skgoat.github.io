@@ -1,1 +1,0 @@
-# skgoat.github.io

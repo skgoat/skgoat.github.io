@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Timesheet</title>
+  <!-- Bootstrap CSS CDN  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+
+  <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+  <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+  
+  <!-- Style to fix the issue of text extending past card length -->
+  <style>
+    .card-body a {
+      word-break: break-all;
+    }
+
+    .articleHeadline {
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Main Bootstrap Search -->
+  <div class="container">
+
+    <!-- Jumbotron for Title -->
+    <div class="jumbotron" style="background-color: black ; color: white;">
+      <h1 class="text-center">
+        <strong>
+          Employee Data Management</strong>
+      </h1>
+      <h2 class="text-center">
+      A Comprehensive Directory of Employee Billable Hours</h2>
+    </div>
+
+    <!-- Row for Searching New York Times -->
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+        <!-- First card is for handling the search parameters -->
+        <div class="card">
+          <div class="card-header">
+            <strong>
+              <i class="fa fa-list-alt"></i> Add Employee</strong>
+          </div>
+          <div class="card-body">
+
+            <!-- Here we create an HTML Form for handling the inputs-->
+            <form role="form">
+
+              <!-- Here we create the text box for capturing the search term-->
+              <div class="form-group">
+                <label for="search">Employee Name</label>
+                <input type="text" class="form-control" id="search-term">
+              </div>
+
+              <!-- Here we capture the number of records that the user wants to retrieve  -->
+              <div class="form-group">
+                <label for="pwd">Role</label>
+                <input type="text" class="form-control" id="search-term">
+
+              </div>
+
+              <!-- Here we capture the Start Year Parameter-->
+              <div class="form-group">
+                <label for="start-year">Start Date (MM/DD/YYYY)</label>
+                <input type="text" class="form-control" id="start-year">
+              </div>
+
+              <!-- Here we capture the End Year Parameter -->
+              <div class="form-group">
+                <label for="end-year">Monthly Rate</label>
+                <input type="text" class="form-control" id="end-year">
+              </div>
+
+              <!-- Here we have our final submit button -->
+             
+                <div class="btn pull-right">
+            <button type="button" class="btn btn-primary" type="submit" id='run-search'>Submit</button>   
+                </div>
+           
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This row will handle all of the retrieved articles -->
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+
+        <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
+        <div class="card">
+
+          <!-- card Heading for the retrieved articles box -->
+          <div class="card-header">
+            <strong>
+              <i class="fa fa-table"></i> Current Employees</strong>
+              
+          </div>
+
+          <!-- This main card will hold each of the resulting articles -->
+          <div class="card-body" id="article-section">
+                <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Employee Name</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Months Worked</th>
+                            <th scope="col">Monthly Rate ($)</th>
+                            <th scope="col">Total Billed ($)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                         
+                          </tr>
+                        </tbody>
+                      </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+    <!-- Footer Region -->
+    <div class="row">
+      <div class="col-sm-12">
+
+        <!-- Line Break followed by closing -->
+      
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- Script -->
+  <script>
+    // START CODING BELOW!!
+
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyBTm_t7rFmL3bR5niUCGmJMzSuygJ-3xX4",
+    authDomain: "test-project-1618a.firebaseapp.com",
+    databaseURL: "https://test-project-1618a.firebaseio.com",
+    projectId: "test-project-1618a",
+    storageBucket: "test-project-1618a.appspot.com",
+    messagingSenderId: "807 092599447"
+  };
+
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+$("#run-search").on("click", function(event) {
+
+event.preventDefault();
+
+var name = $("#start-year").val().trim();
+
+var role = $("#search-term").val().trim();
+
+var start = $("#start-year").val().trim(),"MM/DD/YYY".format("x");
+
+var rate = $("#end-year").val().trim();
+
+console.log(name);
+
+console.log(role);
+
+console.log(start);
+
+console.log(rate);
+
+database.ref().push({
+    name: name,
+    role: role,
+    start: start,
+    rate: rate
+});
+
+
+
+
+})
+
+
+
+</script>
+</body>
+
+</html>
+
+
+</body>
+
+</html>
